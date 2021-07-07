@@ -30,15 +30,15 @@
       </div>
 
       <div class="flex items-center justify-center mt-4">
-        <inertia-link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">
-          ¿Olvidaste tu contraseña?
-        </inertia-link>
-      </div>
-
-      <div class="flex items-center justify-center mt-4">
         <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
           Ingresar
         </jet-button>
+      </div>
+
+      <div class="flex items-center justify-center mt-4">
+        <inertia-link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-blueMechanic300">
+          ¿Olvidaste tu contraseña?
+        </inertia-link>
       </div>
     </form>
 
@@ -46,7 +46,7 @@
     <template #register>
       <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
         <div class="flex justify-center">
-          <inertia-link :href="route('register')" class="underline text-sm text-gray-600 hover:text-gray-900">
+          <inertia-link :href="route('register')" class="underline text-sm text-gray-600 hover:text-blueMechanic300">
             Registrarse
           </inertia-link>
         </div>
