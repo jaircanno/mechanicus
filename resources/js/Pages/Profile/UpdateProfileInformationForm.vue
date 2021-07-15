@@ -100,7 +100,7 @@
       JetSecondaryButton,
     },
 
-    props: ['user'],
+    props: ['user', 'userInfo'],
 
     data() {
       return {
@@ -108,8 +108,8 @@
           _method: 'PUT',
           name: this.user.name,
           email: this.user.email,
-          cell_phone_number: '',
-          rfc: '',
+          cell_phone_number: this.userInfo.cell_phone_number,
+          rfc: this.userInfo.rfc,
           photo: null,
         }),
 
