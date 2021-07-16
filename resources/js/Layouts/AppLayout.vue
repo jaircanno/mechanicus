@@ -20,6 +20,15 @@
                 <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                   Panel de Control
                 </jet-nav-link>
+                <jet-nav-link :href="route('customers')" :active="route().current('customers')">
+                  Clientes
+                </jet-nav-link>
+                <jet-nav-link :href="route('dashboard')">
+                  Compañias
+                </jet-nav-link>
+                <jet-nav-link :href="route('dashboard')">
+                  Empleados
+                </jet-nav-link>
               </div>
             </div>
 

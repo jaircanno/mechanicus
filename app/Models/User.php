@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -128,4 +129,76 @@ class User extends Authenticatable
     {
         return $this->morphOne(Address::class, 'addressable');
     }
+
+    /**
+     * Get the Customer records associated with the user.
+     *
+     * @return HasMany
+     */
+    public function customers(): HasMany
+    {
+        return $this->hasMany(Customer::class, 'user_id', 'id');
+    }
+
+
+    /* * * * AUXILIARY FUNCTIONS * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+    /* ----- UserInfo functions ---------------------------------------------------------------- */
+
+
+    /* ----- Roles functions ------------------------------------------------------------------- */
+    /**
+     * Check if the User has a certain Role.
+     *
+     * @param array $roles
+     * @return bool
+     */
+    public function hasRole(array $roles): bool
+    {
+        foreach ($roles as $role) {
+            if ($this->role->name === $role) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Determines if the user is an owner role type.
+     *
+     * @return bool
+     */
+    public function isOwner(): bool
+    {
+        return $this->hasRole(['owner']);
+    }
+
+    /**
+     * Auxiliary function to get the owner id.
+     *
+     * @return mixed
+     */
+    public function getOwnerId()
+    {
+        return $this->isOwner() ? $this->id : $this->owner[0]->id;
+    }
+
+
+    /* ----- Customers functions --------------------------------------------------------------- */
+    /**
+     * Get the Customers records associated with the owner user.
+     *
+     * @return mixed
+     */
+    public function getUserCustomers()
+    {
+        return $this->isOwner() ? $this->customers : $this->owner[0]->customers;
+    }
+
+
+    /* ----- Companies functions --------------------------------------------------------------- */
+
+
+    /* ----- Vehicles functions ---------------------------------------------------------------- */
+
 }
